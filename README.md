@@ -3,7 +3,7 @@ This Library API is a completely automatic and easy way to deal with thread pool
 
 ![image](https://github.com/RubensTFJ/Threads_Pool_API/assets/89268663/3b190168-a5db-46fb-bb47-d68d9052be50)
 
-As shown in the image,  initializing the thread pool is as simple as calling threads()->start(), This function call handles all the necessary setup for the pool.
+As shown in the image,  initializing the thread pool is as simple as calling `threads()->start()`, This function call handles all the necessary setup for the pool.
 
 After proper initialization, to use the Thread Pool you will call `threads()->deploy()`. The `deploy()` function takes a structure called `t_task`, and the order of arguments is crucial. The first argument is the function you want a thread to execute, followed by the arguments that this function will receive. If the entire Pool is occupied, the main thread will be blocked until a thread becomes available to handle the task.
 Important to note:
