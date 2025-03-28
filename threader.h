@@ -1,7 +1,8 @@
-#ifndef THREADER
-# define THREADER
+#ifndef THREADER_H
+# define THREADER_H
 
 # include "thread_pool.h"
+# include "tasker.h"
 
 typedef struct s_fullthreader {
 	int			(*deploy)(t_task);

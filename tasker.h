@@ -1,12 +1,11 @@
-#ifndef TASKER
-# define TASKER
+#ifndef TASKER_H
+# define TASKER_H
 
-# include "threader.h"
+# include <pthread.h>
 # include "thread_pool.h"
 
 typedef pthread_mutex_t		t_mutex;
 typedef struct s_tasker		t_tasker;
-typedef struct s_task		t_task;
 typedef struct s_threader	t_threader;
 
 typedef	struct s_tlist {

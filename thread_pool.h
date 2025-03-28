@@ -13,9 +13,9 @@
 #ifndef THREAD_POOL_H
 # define THREAD_POOL_H
 
-# include <pthread.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdlib.h>
 
 # define NOF_THREADS 4
 # define POOL_SLEEP 20
@@ -32,7 +32,7 @@ typedef struct s_task
 
 typedef struct s_threader
 {
-	void		(*deploy)(t_task);
+	int			(*deploy)(t_task);
 	void		(*queue)(t_task);
 	void		(*queue_to)(t_task);
 	void		(*wait)(void);

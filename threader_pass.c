@@ -31,7 +31,7 @@ void	threader_queue_task(t_task todo)
 	threader_queue_task_to(todo, ((t_fullthreader*)threads())->last_deploy);
 }
 
-static int	threader_give_task(t_task todo)
+int	threader_give_task(t_task todo)
 {
 	static int	id;
 	t_tasker	*handler;
