@@ -11,28 +11,10 @@
 /* ************************************************************************** */
 
 #include "thread_pool.h"
+#include "tasker.h"
+#include "threader.h"
 
-static void	give_task(t_task todo)
-{
-	static int	i;
-	t_tasker	*handler;
-
-	handler = ((t_fullthreader *)threads())->all;
-	while (todo.execute)
-	{
-		pthread_mutex_lock(&handler[i].self_lock);
-		if (!handler[i]._task)
-		{
-			handler[i].task = todo;
-			handler[i]._task = 1;
-			todo.execute = NULL;
-		}
-		pthread_mutex_unlock(&handler[i].self_lock);
-		i = (i + 1) * (i < (NOF_THREADS - 1));
-	}
-}
-
-static void	wait_threads(void)
+static void	threader_wait(void)
 {
 	int			i;
 	t_tasker	*handlers;
@@ -47,7 +29,7 @@ static void	wait_threads(void)
 	}
 }
 
-static void	end_threads(void)
+static void	threader_end(void)
 {
 	int			i;
 	t_tasker	*handlers;
@@ -86,7 +68,7 @@ static void	init_threads(void)
 	i = 0;
 	while (i < NOF_THREADS)
 	{
-		set_tasker(&handlers[i], i);
+		init_tasker(&handlers[i], i);
 		pthread_create(&handlers[i].thread, NULL,
 			(void *)thread_hub, &handlers[i]);
 		i++;
@@ -96,10 +78,12 @@ static void	init_threads(void)
 inline t_threader	*threads(void)
 {
 	static t_fullthreader	manager = {
-		give_task,
-		wait_threads,
+		threader_give_task,
+		threader_queue_task,
+		threader_queue_task_to,
+		threader_wait,
 		init_threads,
-		end_threads,
+		threader_end,
 	};
 
 	return ((t_threader *)&manager);
