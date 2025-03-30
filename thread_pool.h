@@ -20,6 +20,8 @@
 # define NOF_THREADS 4
 # define POOL_SLEEP 20
 
+typedef struct s_threader t_threader;
+
 typedef struct s_task
 {
 	void		(*execute)();
@@ -30,15 +32,16 @@ typedef struct s_task
 	void		*arg5;
 } t_task;
 
-typedef struct s_threader
+struct s_threader
 {
-	int			(*deploy)(t_task);
-	void		(*queue)(t_task);
-	void		(*queue_to)(t_task);
+	t_threader	*(*deploy)(t_task);
+	t_threader	*(*queue)(t_task);
+	t_threader	*(*queue_to)(t_task, size_t);
 	void		(*wait)(void);
 	void		(*start)(void);
 	void		(*end)(void);
-} t_threader;
+	int			id;
+};
 
 t_threader			*threads(void);
 

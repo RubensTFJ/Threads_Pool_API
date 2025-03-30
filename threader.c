@@ -49,10 +49,9 @@ static void	threader_end(void)
 	while (i < NOF_THREADS)
 	{
 		pthread_join(handlers[i].thread, NULL);
-		pthread_mutex_destroy(&handlers[i].self_lock);
+		handlers[i].destroy(&handlers[i]);
 		i++;
 	}
-	bzero(handlers, sizeof(t_tasker) * NOF_THREADS);
 }
 
 static void	init_threads(void)

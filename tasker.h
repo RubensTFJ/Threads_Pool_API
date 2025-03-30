@@ -18,7 +18,7 @@ struct s_tasker {
 	int			_task;
 	int			(*hastask)(t_tasker *);
 	int			(*roll_task)(t_tasker *);
-	void		(*clear)(t_tasker *);
+	void		(*destroy)(t_tasker *);
 	pthread_t	thread;
 	t_task		task;
 	t_tlist		*queue;
