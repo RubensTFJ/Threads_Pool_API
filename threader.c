@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.c                                          :+:      :+:    :+:   */
+/*   threader.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:03:41 by rteles-f          #+#    #+#             */
-/*   Updated: 2023/11/09 21:20:56 by rteles-f         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:54:31 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static void	threader_end(void)
 	i = 0;
 	while (i < NOF_THREADS)
 	{
-		threads()->deploy((t_task){pthread_exit, NULL});
+		threader_queue_task_to((t_task){.execute = pthread_exit, NULL}, i);
+		// threads()->deploy((t_task){pthread_exit, NULL});
 		i++;
 	}
 	handlers = ((t_fullthreader *)threads())->all;
@@ -49,7 +50,7 @@ static void	threader_end(void)
 	while (i < NOF_THREADS)
 	{
 		pthread_join(handlers[i].thread, NULL);
-		handlers[i].destroy(&handlers[i]);
+		handlers[i].destroy(&(handlers[i]));
 		i++;
 	}
 }
@@ -83,6 +84,7 @@ inline t_threader	*threads(void)
 		threader_wait,
 		init_threads,
 		threader_end,
+		.id = 0
 	};
 
 	return ((t_threader *)&manager);

@@ -24,7 +24,8 @@ typedef struct s_threader t_threader;
 
 typedef struct s_task
 {
-	void		(*execute)();
+	// void		(*execute)();
+	void		*execute;
 	void		*arg1;
 	void		*arg2;
 	void		*arg3;

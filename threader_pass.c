@@ -1,23 +1,24 @@
 #include "thread_pool.h"
 #include "tasker.h"
 #include "threader.h"
+#include <stdio.h>
 
 t_threader	*threader_queue_task_to(t_task todo, size_t id)
 {
 	t_tasker		*handler;
 	t_tlist			**tail;
-	t_tlist			*new;
+	t_tlist			*new_node;
 
 	if (id >= NOF_THREADS)
 		return (threads());
 	handler = &(((t_fullthreader *)threads())->all[id]);
-	new = calloc(1, sizeof(t_tlist));
-	new->content = todo;
+	new_node = calloc(1, sizeof(t_tlist));
+	new_node->content = todo;
 	pthread_mutex_lock(&handler->self_lock);
-	tail = &handler->queue;
+	tail = &(handler->queue);
 	while (*tail)
-		*tail = (*tail)->next;
-	*tail = new;
+		tail = &((*tail)->next);
+	*tail = new_node;
 	pthread_mutex_unlock(&handler->self_lock);
 	return (threads());
 }
@@ -28,6 +29,9 @@ t_threader	*threader_queue_task(t_task todo)
 	return (threads());
 }
 
+// Use queue_task_to to pass the task instead.
+// Then change all access from the task variable
+//to look into the queue instead.
 t_threader	*threader_give_task(t_task todo)
 {
 	static int	id;
