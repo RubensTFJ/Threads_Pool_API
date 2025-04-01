@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   threader.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/01 13:25:04 by rteles-f          #+#    #+#             */
+/*   Updated: 2025/04/01 13:25:05 by rteles-f         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef THREADER_H
 # define THREADER_H
 
 # include "thread_pool.h"
 # include "tasker.h"
 
-typedef struct s_fullthreader {
+typedef struct s_fullthreader
+{
 	t_threader	*(*deploy)(t_task);
 	t_threader	*(*queue)(t_task);
 	t_threader	*(*queue_to)(t_task, size_t);
@@ -14,7 +27,7 @@ typedef struct s_fullthreader {
 	int			id;
 	t_tasker	all[NOF_THREADS];
 	int			on;
-} t_fullthreader;
+}	t_fullthreader;
 
 t_threader	*threader_give_task(t_task todo);
 t_threader	*threader_queue_task(t_task todo);

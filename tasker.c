@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 22:55:18 by rteles-f          #+#    #+#             */
-/*   Updated: 2025/04/01 13:06:06 by rteles-f         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:21:04 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	thread_hub(t_tasker *this)
 	{
 		if (this->hastask(this))
 		{
-			((void(*)())(this->task.execute))(this->task.arg1, this->task.arg2,
+			((void (*)())(this->task.execute))(this->task.arg1, this->task.arg2,
 				this->task.arg3, this->task.arg4, this->task.arg5);
 			this->roll_task(this);
 		}

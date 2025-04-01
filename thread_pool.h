@@ -20,7 +20,7 @@
 # define NOF_THREADS 4
 # define POOL_SLEEP 20
 
-typedef struct s_threader t_threader;
+typedef struct s_threader	t_threader;
 
 typedef struct s_task
 {
@@ -31,7 +31,7 @@ typedef struct s_task
 	void		*arg3;
 	void		*arg4;
 	void		*arg5;
-} t_task;
+}	t_task;
 
 struct s_threader
 {

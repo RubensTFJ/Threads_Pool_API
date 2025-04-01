@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   threader_pass.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/01 13:25:16 by rteles-f          #+#    #+#             */
+/*   Updated: 2025/04/01 13:27:25 by rteles-f         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "thread_pool.h"
 #include "tasker.h"
 #include "threader.h"
@@ -25,7 +37,7 @@ t_threader	*threader_queue_task_to(t_task todo, size_t id)
 
 t_threader	*threader_queue_task(t_task todo)
 {
-	threader_queue_task_to(todo, ((t_fullthreader*)threads())->id);
+	threader_queue_task_to(todo, ((t_fullthreader *)threads())->id);
 	return (threads());
 }
 

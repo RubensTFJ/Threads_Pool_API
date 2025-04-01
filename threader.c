@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:03:41 by rteles-f          #+#    #+#             */
-/*   Updated: 2025/04/01 12:54:31 by rteles-f         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:24:31 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	threader_wait(void)
 	}
 }
 
+// threads()->deploy((t_task){pthread_exit, NULL});
 static void	threader_end(void)
 {
 	int			i;
@@ -42,7 +43,6 @@ static void	threader_end(void)
 	while (i < NOF_THREADS)
 	{
 		threader_queue_task_to((t_task){.execute = pthread_exit, NULL}, i);
-		// threads()->deploy((t_task){pthread_exit, NULL});
 		i++;
 	}
 	handlers = ((t_fullthreader *)threads())->all;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tasker.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/01 13:21:32 by rteles-f          #+#    #+#             */
+/*   Updated: 2025/04/01 13:23:42 by rteles-f         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TASKER_H
 # define TASKER_H
 
@@ -8,12 +20,14 @@ typedef pthread_mutex_t		t_mutex;
 typedef struct s_tasker		t_tasker;
 typedef struct s_threader	t_threader;
 
-typedef	struct s_tlist {
+typedef struct s_tlist
+{
 	t_task			content;
 	struct s_tlist	*next;
-} t_tlist;
+}	t_tlist;
 
-struct s_tasker {
+struct s_tasker
+{
 	int			id;
 	int			_task;
 	int			(*hastask)(t_tasker *);
