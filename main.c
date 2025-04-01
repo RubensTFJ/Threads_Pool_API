@@ -7,9 +7,7 @@
 
 void	wrap_printf(void *a, void *b, void *c, void *d, void *e)
 {
-	(void)c;
-	(void)d;
-	(void)e;
+	(void)c, (void)d, (void)e;
 	printf(a, *(int**)&b);
 }
 
